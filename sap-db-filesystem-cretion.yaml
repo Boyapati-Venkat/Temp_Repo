@@ -1,6 +1,6 @@
 ---
 - name: playbook for simple 10 GB partition
-  hosts: APPVMS 
+  hosts: DBVMS 
   become: true
   tasks:
    - name: create partition 1
