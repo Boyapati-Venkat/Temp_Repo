@@ -1,1 +1,55 @@
-
+---
+- name: Package Installation
+  hosts: APPVMS
+  become: true
+  tasks:
+  - name: Installing list of packages on to the APP Machines 
+    package: name={{item}} state=present
+    with_items: 
+     - uuidd
+     - libnsl
+     - libatomic
+     - psmisc
+     - libssh2
+     - tcsh
+     - nfs-utils
+     - bind-utils
+     - expect
+     - graphviz
+     - iptraf-ng
+     - krb5-workstation
+     - libcanberra-gtk2
+     - libibverbs
+     - libicu
+     - libpng12
+     - lm_sensors
+     - numactl
+     - PackageKit-gtk3-module
+     - xorg-x11-xauth
+     - autoconf.noarch
+     - automake.noarch
+     - cyrus-sasl.x86_64
+     - expat.x86_64
+     - fontconfig.x86_64
+     - glibc-devel.i686
+     - keyutils-libs.x86_64
+     - krb5-libs.x86_64
+     - libcom_err.x86_64
+     - libidn2.x86_64
+     - libselinux.x86_64
+     - libssh2.x86_64
+     - libxcb.i686
+     - nspr.x86_64
+     - nss.x86_64
+     - nss-softokn.x86_64
+     - nss-softokn-freebl.x86_64
+     - nss-util.x86_64
+     - openldap.x86_64
+     - openssl.x86_64
+     - zlib.x86_64
+     - libstdc++.i686
+     - libX11.i686
+     - libXau.i686
+     - glibc.i686
+     - libgcc.i686
+     - libuuid.i686
