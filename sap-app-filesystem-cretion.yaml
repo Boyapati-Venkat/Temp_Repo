@@ -1,5 +1,5 @@
 ---
-- name: playbook for simple 1 GB partition
+- name: playbook for simple 10 GB partition
   hosts: APPVMS 
   become: true
   tasks:
