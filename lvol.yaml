@@ -1,0 +1,12 @@
+- name: Create logical volumes on vg_data
+  lvol:
+    vg: vg_data
+    lv: "{{ item.name }}"
+    size: "{{ item.size }}"
+    opts: " -i {{ item.stripes }} -I {{ item.stripe_size }} "
+  with_items:
+    - { 'name': 'lv_shared', 'size': '60G', 'stripes': 5, 'stripe_size': '64' }
+    - { 'name': 'lv_log', 'size': '60G', 'stripes': 5, 'stripe_size': '32' }   
+    - { 'name': 'lv_sap', 'size': '60G', 'stripes': 5, 'stripe_size': '64' }
+    - { 'name': 'lv_swap', 'size': '2G', 'stripes': 5, 'stripe_size': '64' }
+    - { 'name': 'lv_backup', 'size': '60G', 'stripes': 5, 'stripe_size': '64' }
