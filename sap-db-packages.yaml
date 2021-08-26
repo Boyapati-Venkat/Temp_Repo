@@ -1,0 +1,38 @@
+---
+- name: Package Installation
+  hosts: DBVMS
+  become: true
+  tasks:
+  - name: Installing list of packages on to the DB Machines 
+    package: name={{item}} state=present
+    with_items: 
+     - uuidd
+     - libnsl
+     - libatomic
+     - psmisc
+     - libssh2
+     - tcsh
+     - nfs-utils
+     - krb5-workstation
+     - libcanberra-gtk2
+     - libibverbs
+     - lm_sensors
+     - numactl
+     - PackageKit-gtk3-module
+     - xorg-x11-xauth
+     - tuned-profiles-sap-hana
+     - expect
+     - gtk2
+     - krb5-libs
+     - libaio
+     - libicu
+     - libtool-ltdl
+     - openssl
+     - rsyslog
+     - sudo
+     - xfsprogs
+     - compat-sap-c++-9
+     - cairo
+     - graphviz
+     - iptraf-ng
+     - net-tools
