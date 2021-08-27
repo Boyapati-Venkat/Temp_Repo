@@ -15,6 +15,7 @@
     - { 'name': 'lv_sap', 'size': '60G', 'stripes': 5, 'stripe_size': '64' }
     - { 'name': 'lv_swap', 'size': '2G', 'stripes': 5, 'stripe_size': '64' }
     - { 'name': 'lv_backup', 'size': '60G', 'stripes': 5, 'stripe_size': '64' }
+    - { 'name': 'lv_data', 'size': '60G', 'stripes': 5, 'stripe_size': '64' }
   - name: Mount filesystems
     mount:
      path: "{{ item.path }}"
