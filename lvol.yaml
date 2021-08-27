@@ -15,3 +15,40 @@
     - { 'name': 'lv_sap', 'size': '60G', 'stripes': 5, 'stripe_size': '64' }
     - { 'name': 'lv_swap', 'size': '2G', 'stripes': 5, 'stripe_size': '64' }
     - { 'name': 'lv_backup', 'size': '60G', 'stripes': 5, 'stripe_size': '64' }
+  - name: Mount filesystems
+    mount:
+     path: "{{ item.path }}"
+     src: "{{ item.src }}"
+     fstype: "{{ item.fstype }}"
+     opts: "{{ item.opts }}"
+     passno: "{{ item.passno }}"
+     dump: "{{ item.dump }}"
+     state: present
+    with_items:
+    - { 'src': '/dev/mapper/vg_data-lv_shared', 'path': '/hana/shared', 'fstype': 'xfs', 'opts': 'defaults', 'passno': '0', 'dump': '0' }
+    - { 'src': '/dev/mapper/vg_data-lv_data', 'path': '/hana/data', 'fstype': 'xfs', 'opts': 'defaults', 'passno': '0', 'dump': '0' }
+    - { 'src': '/dev/mapper/vg_data-lv_log', 'path': '/hana/log', 'fstype': 'xfs', 'opts': 'defaults', 'passno': '0', 'dump': '0' }
+    - { 'src': '/dev/mapper/vg_data-lv_sap', 'path': '/usr/sap', 'fstype': 'xfs', 'opts': 'defaults', 'passno': '0', 'dump': '0' }
+    - { 'src': '/dev/mapper/vg_data-lv_swap', 'path': 'swap', 'fstype': 'swap', 'opts': 'defaults', 'passno': '0', 'dump': '0' }
+    - { 'src': '/dev/mapper/vg_data-lv_backup', 'path': '/hana/backup', 'fstype': 'xfs', 'opts': 'defaults', 'passno': '0', 'dump': '0' }
+  - name: Create filesystems
+    filesystem: fstype={{ item.fstype }} dev={{ item.name }}
+    with_items:
+    - { 'name': '/dev/vg_data/lv_shared', 'fstype': 'xfs' }
+    - { 'name': '/dev/vg_data/lv_data', 'fstype': 'xfs' }
+    - { 'name': '/dev/vg_data/lv_log', 'fstype': 'xfs' }
+    - { 'name': '/dev/vg_data/lv_sap', 'fstype': 'xfs' }
+    - { 'name': '/dev/vg_data/lv_backup', 'fstype': 'xfs' }
+  - name: Create directories
+    file: path={{ item }} state=directory
+    with_items:
+    - '/hana/backup'
+    - '/hana/shared'
+    - '/hana/data'
+    - '/hana/log'
+    - '/usr/sap'
+  - name: Create swap
+    shell: 'mkswap /dev/vg_data/lv_swap' 
+  - name: Activate swap
+    shell: 'swapon /dev/vg_data/lv_swap'
+ 
