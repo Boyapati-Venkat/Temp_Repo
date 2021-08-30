@@ -1,0 +1,34 @@
+---
+- name: Disable SE Linux
+  hosts: DBVMS
+  become: true
+  tasks:
+  - name: disable se linux
+    selinux:
+     state: disabled
+  - name: disabling {{ item }} 
+    systemd:
+     enabled: no
+     name: {{ item }}
+    with_items:
+    - abrtd
+    - abrt-ccpp
+    - kdump
+    - firewalld
+  - name: enabling uuid 
+    systemd:
+     enabled: yes
+     name: uuidd 
+  - name: stopping {{ item }} 
+    systemd:
+     state: stopped
+     name: {{ item }}
+    with_items:
+    - abrtd
+    - abrt-ccpp
+    - kdump
+    - firewalld
+  - name: starting {{ item }} 
+    systemd:
+     state: started
+     name: uuidd 
