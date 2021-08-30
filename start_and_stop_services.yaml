@@ -11,8 +11,6 @@
      enabled: no
      name: "{{ item }}"
     with_items:
-    - abrtd
-    - abrt-ccpp
     - kdump
     - firewalld
   - name: enabling uuid 
