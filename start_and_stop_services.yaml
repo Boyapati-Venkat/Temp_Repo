@@ -22,8 +22,6 @@
      state: stopped
      name: "{{ item }}"
     with_items:
-    - abrtd
-    - abrt-ccpp
     - kdump
     - firewalld
   - name: starting "{{ item }}"
