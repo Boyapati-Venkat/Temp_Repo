@@ -6,10 +6,10 @@
   - name: disable se linux
     selinux:
      state: disabled
-  - name: disabling {{ item }} 
+  - name: disabling "{{ item }}"
     systemd:
      enabled: no
-     name: {{ item }}
+     name: "{{ item }}"
     with_items:
     - abrtd
     - abrt-ccpp
@@ -19,16 +19,16 @@
     systemd:
      enabled: yes
      name: uuidd 
-  - name: stopping {{ item }} 
+  - name: stopping "{{ item }}"
     systemd:
      state: stopped
-     name: {{ item }}
+     name: "{{ item }}"
     with_items:
     - abrtd
     - abrt-ccpp
     - kdump
     - firewalld
-  - name: starting {{ item }} 
+  - name: starting "{{ item }}"
     systemd:
      state: started
      name: uuidd 
