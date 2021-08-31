@@ -5,6 +5,9 @@
   tasks:
   - name: collect facts about system services
     service_facts:
+    services:
+     name: abrtd
+     source: systemd
     register: services_state
 
   - name: Debug
