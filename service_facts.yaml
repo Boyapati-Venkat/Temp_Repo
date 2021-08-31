@@ -9,4 +9,4 @@
 
   - name: Debug
     debug:
-     var: services_state
+     var: services_state.services.abrtd.state
