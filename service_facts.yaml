@@ -6,7 +6,12 @@
   - name: collect facts about system services
     service_facts:
     register: services_state
-
   - name: Debug
     debug:
      var: services_state.services.abrtd.state
+  - name: disabling abrtd service
+    systemd:
+     enabled: no
+     name: abrtd
+    when: services_state.services.abrtd.state != "VARIABLE IS NOT DEFINED!"
+    
