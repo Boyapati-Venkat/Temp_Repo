@@ -6,3 +6,7 @@
       dest: "/etc/sysctl.d/sap.conf"
       content: |
        kernel.pid_max=4194304
+       # SAP settings 
+       vm.max_map_count = 2147483647 
+       kernel.pid_max = 4194304
+  
