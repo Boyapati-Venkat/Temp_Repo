@@ -13,5 +13,5 @@
     systemd:
      enabled: no
      name: abrtd
-    when: services_state.services.abrtd.state != "VARIABLE IS NOT DEFINED!"
+    when: var.services_state.services.abrtd.state != "VARIABLE IS NOT DEFINED!"
     
