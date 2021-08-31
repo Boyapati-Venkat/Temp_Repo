@@ -1,0 +1,12 @@
+---
+- name: playbook for simple 10 GB partition
+  hosts: DBVMS 
+  become: true
+  tasks:
+  - name: collect facts about system services
+    service_facts:
+    register: services_state
+
+  - name: Debug
+    debug:
+     var: services_state
