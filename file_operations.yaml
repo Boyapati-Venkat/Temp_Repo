@@ -9,4 +9,10 @@
        # SAP settings 
        vm.max_map_count = 2147483647 
        kernel.pid_max = 4194304
+  - name: Creating a file with content
+    copy:
+      dest: "/etc/security/limits.d/99-sap.conf"
+      content: |
+       * soft core 0
+       * hard core 0    
   
